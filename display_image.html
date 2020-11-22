@@ -1,0 +1,63 @@
+<?php  
+ $connect = mysqli_connect("localhost", "root", "", "testing");  
+$result = $_GET['data']; 
+echo $result;
+ if(isset($_GET['submit']))
+{
+   Display();
+   echo ("inside isset");
+   
+           
+} 
+$id1=2;
+ function Display()
+ {
+  
+  
+      global $connect;
+      global $id1;
+      $id1=$id1+1;
+      echo $id1;
+      $query = "SELECT * FROM tbl_images where id= 2";
+      
+                $result = mysqli_query($connect, $query);  
+                while($row = mysqli_fetch_array($result))  
+                {  
+                     echo '  
+                          <tr>  
+                               <td>  
+                                    <img src="data:image/jpeg;base64,'.base64_encode($row['name'] ).'" height="200" width="200" class="img-thumnail" />  
+                               </td>  
+                          </tr>  
+                     ';  
+               // }  
+ }  
+}
+ ?>  
+
+
+<!DOCTYPE html>  
+ <html>  
+      <head>  
+           <title>HCI project </title>  
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+      </head>  
+      <body>  
+           <br /><br />  
+           <div class="container" style="width:500px;">  
+                <h3 align="center">Insert and Display Images From Mysql Database in PHP</h3>  
+                <br />  
+               
+                <form method="get" name="form" action="display_image.php"> 
+                <input type="text" placeholder="Enter Data" name="data"> 
+                <input type="submit" name="submit" id="insert" value="display_image" class="btn btn-info" /> 
+                <input type="submit" name="submit" id="insert" value="next" class="btn btn-info" /> 
+                </form>   
+                <br />  
+                <br />  
+               
+           </div>  
+      </body>  
+ </html>  
